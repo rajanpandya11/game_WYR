@@ -1,5 +1,8 @@
-import React from "react";
+import thunk from 'redux-thunk'
+import logger from './logger'
+import { applyMiddleware } from 'redux'
 
-export default function (){
-    return <p>this is default middleware for now</p>
-}
+export default applyMiddleware(
+  thunk,
+  logger,
+)

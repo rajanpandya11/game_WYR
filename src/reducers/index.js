@@ -1,5 +1,4 @@
-import React from "react";
+import { combineReducers } from 'redux';
+import temp from './temp';
 
-export default function (){
-    return <p>this is default reducer for now</p>
-}
+export default combineReducers({temp});
