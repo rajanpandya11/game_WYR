@@ -1,4 +1,6 @@
-import React from 'react';
+import React from 'react'
+import { connect } from 'react-redux'
+import Nav from './Nav'
 import Login from './login'
 
 class App extends React.Component {
@@ -14,9 +16,7 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-        <header className="App-header">
-          This is header
-        </header>
+        <Nav />
         { this.state.authenticatedUser.length === 0 && <Login /> }
       </div>
     );
@@ -24,4 +24,8 @@ class App extends React.Component {
 
 }
 
-export default App;
+function mapStateToProps () {
+  return {};
+}
+
+export default connect(mapStateToProps)(App)
