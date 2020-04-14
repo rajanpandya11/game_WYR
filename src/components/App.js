@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 // import Login from './Login'
 // import Home from './Home'
@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 // import UserCard from './UserCard'
 // import NewPoll from './NewPoll'
 // import Leaderboard from './Leaderboard'
-import { Route, Switch, Redirect } from 'react-router-dom';
+// import { Route, Switch, Redirect } from 'react-router-dom';
 import { handleInitialData } from '../actions/shared'
 
 class App extends React.Component {
