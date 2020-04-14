@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux';
-import temp from './temp';
+import { users } from './users'
+import { questions } from './questions'
+import { authedUser } from './authedUser'
 
-export default combineReducers({temp});
+export default combineReducers({users, questions, authedUser});
