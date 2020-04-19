@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Card, Button } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+import { Card  } from 'semantic-ui-react'
 
 class QuestionCard extends React.Component{
     render(){
@@ -19,11 +20,11 @@ class QuestionCard extends React.Component{
                 <Card.Content extra>
                     { answered 
                     ? (<div className='ui single'>
-                        <Button basic color='blue'>View the Poll</Button>
+                        <Link to={'/polls/' + question_id} as="button" className='ui button blue'> View The Poll</Link>
                        </div>
                     )
                     : (<div className='ui single'>
-                            <Button basic color='green'>Vote</Button>
+                        <Link to={'/vote/' + question_id} as="button" className='ui button green'> Vote</Link>
                         </div>
                     )
                 }
