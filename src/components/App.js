@@ -6,7 +6,7 @@ import Home from './Home'
 // import UserCard from './UserCard'
 import NewPoll from './NewPoll'
 // import Leaderboard from './Leaderboard'
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Link, Route, Switch, Redirect } from 'react-router-dom';
 import { handleInitialData } from '../actions/shared'
 import {Header} from 'semantic-ui-react'
 import Vote from './Vote'
@@ -31,14 +31,19 @@ class App extends React.Component {
     const { authedUser } = this.props;
     return (
 
-        <switch>
+        <Switch>
           <Route exact path='/'>
             <div>
               { authedUser === null 
-              ? (<p> something's wrong here</p>)
-              : ( <Fragment> <Header as="h1" size='huge' dividing textAlign="center" > Would you rather</Header> <Home/> </Fragment>)
+              ? (<p> Loading </p>)
+              : ( <Fragment> <Header as="h1" size='huge' dividing textAlign="center" > <Link to="/"> Would you rather</Link> </Header> <Home/> </Fragment>)
               }
             </div>
+          </Route>
+          <Route exact path={["/vote/", "/vote", "/polls/", "/polls"]} render={(history) => 
+            ( 
+              <Redirect to="/" /> 
+            )}> 
           </Route>
           <Route path='/vote/:id' component={Vote}></Route>
           <Route path='/polls/:id' component={Polls}></Route>
@@ -49,7 +54,7 @@ class App extends React.Component {
             <Fragment> <Login />  </Fragment>           
           </Route>
 
-        </switch>
+        </Switch>
 
 
     );

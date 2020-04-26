@@ -30,8 +30,6 @@ class QuestionCard extends React.Component{
                 }
                 </Card.Content>
             </Card>
-            // <div > {theKeys.filter(k => ['author', 'id'].includes(k)).map(k => <div> <p>{k} : {theQuestion[k]} </p>  </div>)} </div>
-            // questions.filter(q=> q.id === question_id).map(q => <div> <p>Question card my props { q.id }  </p> { answered === true ? <p> it is answered </p> : <p> it is not answered </p> } <p>userId : {userId }</p></div> ) 
             )
     }
 }
