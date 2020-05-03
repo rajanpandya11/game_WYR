@@ -9,20 +9,28 @@ class QuestionCard extends React.Component{
         theCard: 'Question'
     }
 
-    handleClick = (e) =>{
-        if(e.target.name === 'Polls')
-            this.setState({theCard: 'Question'})
-        if(e.target.name === 'Question')
-            this.setState({theCard: 'Polls'})
+    handleClick = (e, answered) =>{
+        if(e.target.name === 'Polls' || e.target.name === 'Vote'){
+            this.setState({theCard: 'Question'}) 
+        }
+        if(e.target.name === 'Question'){
+            answered ? this.setState({theCard: 'Polls'}) : this.setState({theCard: 'Vote'})
+        }
     }
 
     render(){
-        let {authedUser, theQuestion, chosenOptionKey, chosenOptionValue, totalPolls, optionOnePoll, optionTwoPoll, users, questions, question_id, answered , userId} = this.props;
+        let {authedUser, theQuestion,  totalPolls, optionOnePoll, optionTwoPoll, users, questions, question_id, answered , userId} = this.props;
 
-        // let theQuestion = questions.filter(q => q.id === question_id)[0];
-        // let theKeys = Object.keys(theQuestion);
         let theCard = this.state.theCard;
 
+        if(theCard === 'Vote'){
+            return(
+                <div >This is vote for id: {theQuestion.id}
+                    
+                    <Link as='button' name='Vote' className='ui button grey'  onClick={(e) => this.handleClick(e, answered)} ><i className="left arrow icon"></i> Go Back</Link>     
+                </div>
+            )
+        }
         if(theCard === 'Polls'){
             return (
                 authedUser === null || users[authedUser] === undefined
@@ -39,7 +47,7 @@ class QuestionCard extends React.Component{
                             </Card.Description>
                         </Card.Content>
                         <Card.Content extra>
-                            <Link as='button' name='Polls' className='ui button grey' onClick={this.handleClick} ><i className="left arrow icon"></i> Go Back</Link>     
+                            <Link as='button' name='Polls' className='ui button grey' onClick={(e) => this.handleClick(e, answered)} ><i className="left arrow icon"></i> Go Back</Link>     
                         </Card.Content> 
                     </Card>
                 )
@@ -58,11 +66,11 @@ class QuestionCard extends React.Component{
                     <Card.Content extra>
                         { answered 
                         ? (<div className='ui single'>
-                            <Link name='Question' as="button" className='ui button blue' onClick={this.handleClick}> View The Poll</Link>
+                            <Link name='Question' as="button" className='ui button blue' onClick={(e) => this.handleClick(e, answered)}> View The Poll</Link>
                            </div>
                         )
                         : (<div className='ui single'>
-                            <Link name='Question' to={'/vote/' + theQuestion.id} as="button" className='ui button green'> Vote</Link>
+                            <Link name='Question' as="button" className='ui button green' onClick={(e) => this.handleClick(e, answered)}> Vote</Link>
                             </div>
                         )
                     }
@@ -75,24 +83,26 @@ class QuestionCard extends React.Component{
 }
 
 function mapStateToProps({authedUser, users, questions}, props){
+    
+    // console.log('authedUser: ',authedUser, 'users: ', users, 'questions: ', questions) 
+    // console.log('props: ', props) 
     let theQuestion = questions[props.question_id];
-    let chosenOptionKey = users[authedUser].answers[theQuestion.id];
-    let chosenOptionValue = theQuestion[chosenOptionKey].text;
     let totalPolls = theQuestion.optionOne.votes.length +  theQuestion.optionTwo.votes.length;
     let optionOnePoll =  Math.floor(theQuestion.optionOne.votes.length / totalPolls  * 100);
     let optionTwoPoll =  Math.floor(theQuestion.optionTwo.votes.length / totalPolls  * 100);
 
-    return {
+    let theObject = {
         authedUser,
         theQuestion,
-        chosenOptionKey,
-        chosenOptionValue,
         totalPolls,
         optionOnePoll,
         optionTwoPoll,
         questions: Object.values(questions),
         users
     }
+    console.log('theObject: ', theObject);
+
+    return theObject
 }
 
 export default connect(mapStateToProps)(QuestionCard)
