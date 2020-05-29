@@ -1,0 +1,3 @@
+when adding a new vote two reducers
+  One * ANSWERS_QUESTION 
+  Two * ADD_VOTE

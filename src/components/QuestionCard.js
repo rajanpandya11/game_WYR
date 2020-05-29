@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Card, Button, Form, Radio } from "semantic-ui-react";
+import { Card, Form, Radio } from "semantic-ui-react";
+import { answersQuestions } from "../actions/questions";
 
 class QuestionCard extends React.Component {
   state = {
@@ -21,7 +22,17 @@ class QuestionCard extends React.Component {
   };
 
   handleChange = (e, comp) => {
+    console.log(this.props.theQuestion);
     this.setState({ theValue: comp.value });
+    let { userId, question_id, theQuestion } = this.props;
+    let answerId =
+      comp === theQuestion.optionOne.text ? "optionOne" : "optionTwo";
+    let theObject = {
+      theUser: userId,
+      theQuestion: question_id,
+      theAnswer: answerId
+    };
+    this.props.dispatch(answersQuestions(theObject));
   };
 
   render() {
