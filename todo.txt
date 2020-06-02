@@ -1,3 +1,10 @@
+todo
+create leaderboard
+submit to create new Question
+create login
+
+
+done
 when adding a new vote two reducers
-  One * ANSWERS_QUESTION 
-  Two * ADD_VOTE
+  One * ANSWERS_QUESTION  
+  Two * ADD_VOTE 

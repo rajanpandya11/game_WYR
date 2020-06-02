@@ -35,7 +35,7 @@ class Home extends React.Component {
           )
         },
         {
-          menuItem: "New Questions",
+          menuItem: "Submit Vote",
           render: () => (
             <Tab.Pane>
               {questionsForUser.unAnswered.map(q => (
@@ -50,6 +50,24 @@ class Home extends React.Component {
             </Tab.Pane>
           )
         },
+
+        {
+          menuItem: "Submit Question",
+          render: () => (
+            <Tab.Pane>
+              {questionsForUser.unAnswered.map(q => (
+                <QuestionCard
+                  key={q.id}
+                  question_id={q.id}
+                  answered={false}
+                  userId={authedUser}
+                  voteHandle={voteHandle}
+                />
+              ))}
+            </Tab.Pane>
+          )
+        },
+
         {
           menuItem: "Leaderboard",
           render: () => <Tab.Pane>Tab 3 Content</Tab.Pane>
