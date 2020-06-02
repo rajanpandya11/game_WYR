@@ -8,8 +8,16 @@ export default function questions(state = {}, action) {
         ...action.questions
       };
     case ANSWERS_QUESTIONS:
+      let { theUser, theQuestion, theAnswer } = action.theObject;
       return {
-        ...state
+        ...state,
+        [theQuestion]: {
+          ...state[theQuestion],
+          [theAnswer]: {
+            ...state[theQuestion][theAnswer],
+            votes: state[theQuestion][theAnswer].votes.concat(theUser)
+          }
+        }
       };
     default:
       return state;

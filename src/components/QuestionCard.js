@@ -22,17 +22,25 @@ class QuestionCard extends React.Component {
   };
 
   handleChange = (e, comp) => {
-    console.log(this.props.theQuestion);
+    console.log("changing the radio state now.");
     this.setState({ theValue: comp.value });
+    console.log("done changing the radio state.");
+  };
+
+  handleVote = (e, comp) => {
+    console.log("voting for the question now.");
     let { userId, question_id, theQuestion } = this.props;
     let answerId =
-      comp === theQuestion.optionOne.text ? "optionOne" : "optionTwo";
+      this.state.theValue === theQuestion.optionOne.text
+        ? "optionOne"
+        : "optionTwo";
     let theObject = {
       theUser: userId,
       theQuestion: question_id,
       theAnswer: answerId
     };
     this.props.dispatch(answersQuestions(theObject));
+    console.log("done voting for the question.");
   };
 
   render() {
@@ -97,7 +105,7 @@ class QuestionCard extends React.Component {
                     name="Vote"
                     as="sm button"
                     className="ui button blue"
-                    // onClick={e => this.handleVote(e, answered)}
+                    onClick={this.handleVote}
                   >
                     Submit
                   </Link>
