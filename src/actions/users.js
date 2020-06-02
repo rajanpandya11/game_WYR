@@ -7,3 +7,10 @@ export function receiveUsers(users) {
     users
   };
 }
+
+export function addVote(theObject) {
+  return {
+    type: ADD_VOTE,
+    theObject
+  };
+}

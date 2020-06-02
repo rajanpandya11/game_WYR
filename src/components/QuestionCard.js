@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Card, Form, Radio } from "semantic-ui-react";
-import { answersQuestions } from "../actions/questions";
 
 class QuestionCard extends React.Component {
   state = {
@@ -28,6 +27,7 @@ class QuestionCard extends React.Component {
   };
 
   handleVote = (e, comp) => {
+    console.group("voting");
     console.log("voting for the question now.");
     let { userId, question_id, theQuestion } = this.props;
     let answerId =
@@ -39,8 +39,10 @@ class QuestionCard extends React.Component {
       theQuestion: question_id,
       theAnswer: answerId
     };
-    this.props.dispatch(answersQuestions(theObject));
+
+    this.props.voteHandle(theObject);
     console.log("done voting for the question.");
+    console.groupEnd();
   };
 
   render() {
@@ -54,7 +56,8 @@ class QuestionCard extends React.Component {
       questions,
       question_id,
       answered,
-      userId
+      userId,
+      voteHandle
     } = this.props;
 
     let theCard = this.state.theCard;
@@ -193,8 +196,6 @@ class QuestionCard extends React.Component {
 }
 
 function mapStateToProps({ authedUser, users, questions }, props) {
-  // console.log('authedUser: ',authedUser, 'users: ', users, 'questions: ', questions)
-  // console.log('props: ', props)
   let theQuestion = questions[props.question_id];
   let totalPolls =
     theQuestion.optionOne.votes.length + theQuestion.optionTwo.votes.length;
@@ -214,7 +215,6 @@ function mapStateToProps({ authedUser, users, questions }, props) {
     questions: Object.values(questions),
     users
   };
-  console.log("theObject: ", theObject);
 
   return theObject;
 }
