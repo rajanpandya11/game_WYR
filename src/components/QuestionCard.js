@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Card, Form, Radio } from "semantic-ui-react";
+import { Card, Form, Radio, Label } from "semantic-ui-react";
 
 class QuestionCard extends React.Component {
   state = {
@@ -24,6 +24,18 @@ class QuestionCard extends React.Component {
     console.log("changing the radio state now.");
     this.setState({ theValue: comp.value });
     console.log("done changing the radio state.");
+  };
+
+  isMyVote = theValue => {
+    let { users, userId, question_id } = this.props;
+    if (
+      users[userId].answers[question_id] !== undefined &&
+      users[userId].answers[question_id] === theValue
+    ) {
+      return true;
+    }
+
+    return false;
   };
 
   handleVote = (e, comp) => {
@@ -67,7 +79,7 @@ class QuestionCard extends React.Component {
       let val2 = theQuestion.optionTwo.text;
       return (
         <div>
-          <Card>
+          <Card style={{ width: "100%" }}>
             <Card.Content>
               <Form>
                 <Form.Field>
@@ -123,7 +135,7 @@ class QuestionCard extends React.Component {
       return authedUser === null || users[authedUser] === undefined ? (
         <p> Loading </p>
       ) : (
-        <Card>
+        <Card style={{ width: "100%" }}>
           <Card.Content>
             <Card.Header>
               {" "}
@@ -132,10 +144,16 @@ class QuestionCard extends React.Component {
             <Card.Meta> By {theQuestion.author}</Card.Meta>
             <Card.Description>
               {theQuestion.optionOne.text} -{" "}
-              {theQuestion.optionOne.votes.length} votes
+              {theQuestion.optionOne.votes.length} votes{" "}
+              {theQuestion.optionOne.votes.includes(userId) && (
+                <Label className="ui teal small tag label">You voted</Label>
+              )}
               <br />
               {theQuestion.optionTwo.text} -{" "}
-              {theQuestion.optionTwo.votes.length} votes
+              {theQuestion.optionTwo.votes.length} votes{" "}
+              {theQuestion.optionTwo.votes.includes(userId) && (
+                <Label className="ui teal small tag label">You voted</Label>
+              )}
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
