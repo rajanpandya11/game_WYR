@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import Nav from "./Nav";
 import { Tab, Container } from "semantic-ui-react";
 import QuestionCard from "./QuestionCard";
-import { answersQuestions } from "../actions/questions";
+import { handleAnswersQuestions } from "../actions/questions";
+import NewPoll from "./NewPoll";
 
 class Home extends React.Component {
   render() {
@@ -11,7 +11,7 @@ class Home extends React.Component {
     let { questionsForUser, authedUser } = this.props;
 
     let voteHandle = theObject => {
-      this.props.dispatch(answersQuestions(theObject));
+      this.props.dispatch(handleAnswersQuestions(theObject));
     };
 
     const panes = props => {
@@ -53,19 +53,7 @@ class Home extends React.Component {
 
         {
           menuItem: "Submit Question",
-          render: () => (
-            <Tab.Pane>
-              {questionsForUser.unAnswered.map(q => (
-                <QuestionCard
-                  key={q.id}
-                  question_id={q.id}
-                  answered={false}
-                  userId={authedUser}
-                  voteHandle={voteHandle}
-                />
-              ))}
-            </Tab.Pane>
-          )
+          render: () => <NewPoll />
         },
 
         {

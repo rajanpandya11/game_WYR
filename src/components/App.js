@@ -13,13 +13,6 @@ import Vote from "./Vote";
 import Polls from "./Polls";
 
 class App extends React.Component {
-  // constructor(props){
-  //   super(props);
-  //   this.state = {
-  //     authenticatedUser: ''
-  //   }
-  // }
-
   componentDidMount() {
     this.props.dispatch(handleInitialData());
   }

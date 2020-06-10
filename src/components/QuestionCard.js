@@ -47,9 +47,9 @@ class QuestionCard extends React.Component {
         ? "optionOne"
         : "optionTwo";
     let theObject = {
-      theUser: userId,
-      theQuestion: question_id,
-      theAnswer: answerId
+      authedUser: userId,
+      qid: question_id,
+      answer: answerId
     };
 
     this.props.voteHandle(theObject);
