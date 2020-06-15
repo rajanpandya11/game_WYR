@@ -29,7 +29,7 @@ class NewPoll extends React.Component {
   render() {
     let { optionOneText, optionTwoText } = this.state;
 
-    let FormExampleForm = () => (
+    return (
       <Form>
         <Form.Group widths={3}>
           <Form.Field>
@@ -57,8 +57,6 @@ class NewPoll extends React.Component {
         </Button>
       </Form>
     );
-
-    return <FormExampleForm />;
   }
 }
 
