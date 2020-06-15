@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Card, Form, Radio, Label } from "semantic-ui-react";
+import { Card, Form, Radio, Label, Button } from "semantic-ui-react";
 
 class QuestionCard extends React.Component {
   state = {
@@ -107,23 +107,23 @@ class QuestionCard extends React.Component {
             </Card.Content>
             <Card.Content extra>
               <div className="ui single">
-                <Link
+                <Button
                   name="Vote"
-                  as="sm button"
-                  className="ui button grey"
+                  // as="button"
+                  className="ui sm button grey"
                   onClick={e => this.handleClick(e, answered)}
                 >
                   <i className="left arrow icon" /> Go Back
-                </Link>
+                </Button>
                 {this.state.theValue !== "" && (
-                  <Link
+                  <Button
                     name="Vote"
-                    as="sm button"
-                    className="ui button blue"
+                    // as="sm button"
+                    className="ui sm button blue"
                     onClick={this.handleVote}
                   >
                     Submit
-                  </Link>
+                  </Button>
                 )}
               </div>
             </Card.Content>
@@ -157,14 +157,14 @@ class QuestionCard extends React.Component {
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <Link
-              as="button"
+            <Button
+              // as="button"
               name="Polls"
               className="ui button grey"
               onClick={e => this.handleClick(e, answered)}
             >
               <i className="left arrow icon" /> Go Back
-            </Link>
+            </Button>
           </Card.Content>
         </Card>
       );
@@ -183,27 +183,27 @@ class QuestionCard extends React.Component {
           <Card.Content extra>
             {answered ? (
               <div className="ui single">
-                <Link
+                <Button
                   name="Question"
-                  as="button"
+                  // as="button"
                   className="ui button blue"
                   onClick={e => this.handleClick(e, answered)}
                 >
                   {" "}
                   View The Poll
-                </Link>
+                </Button>
               </div>
             ) : (
               <div className="ui single">
-                <Link
+                <Button
                   name="Question"
-                  as="button"
+                  // as="button"
                   className="ui button green"
                   onClick={e => this.handleClick(e, answered)}
                 >
                   {" "}
                   Vote
-                </Link>
+                </Button>
               </div>
             )}
           </Card.Content>

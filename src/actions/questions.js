@@ -42,6 +42,7 @@ export function handleAnswersQuestions(theObject) {
 export function handleSaveQuestion(theObject) {
   return dispatch => {
     return saveQuestion(theObject).then(question => {
+      console.log("question: ", question);
       dispatch(addQuestion(question));
       dispatch(addQuestionToUser(question));
     });

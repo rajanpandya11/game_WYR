@@ -24,7 +24,7 @@ export default function questions(state = {}, action) {
         }
       };
     case ADD_QUESTION:
-      let { question } = action;
+      let question = action.theObject;
       return {
         ...state,
         [question.id]: question
