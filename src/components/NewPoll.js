@@ -1,12 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Button, Form } from "semantic-ui-react";
+import { Button, Form, Message } from "semantic-ui-react";
 import { handleSaveQuestion } from "../actions/questions";
 
 class NewPoll extends React.Component {
   state = {
     optionOneText: "",
-    optionTwoText: ""
+    optionTwoText: "",
+    status: false
   };
 
   handleChange = e => {
@@ -23,14 +24,14 @@ class NewPoll extends React.Component {
       optionTwoText
     };
     this.props.dispatch(handleSaveQuestion(theObject));
-    this.setState({ optionOneText: "", optionTwoText: "" });
+    this.setState({ optionOneText: "", optionTwoText: "", status: true });
   };
 
   render() {
-    let { optionOneText, optionTwoText } = this.state;
+    let { optionOneText, optionTwoText, status } = this.state;
 
     return (
-      <Form>
+      <Form onSubmit={this.handleSubmit} success={status}>
         <Form.Group widths={3}>
           <Form.Field>
             <label>would you rather?</label>
@@ -52,9 +53,12 @@ class NewPoll extends React.Component {
             />
           </Form.Field>
         </Form.Group>
-        <Button type="submit" onClick={this.handleSubmit}>
-          Submit
-        </Button>
+        <Message
+          success
+          header="Saved!"
+          content="Good job submitting a question."
+        />
+        <Button type="submit">Submit</Button>
       </Form>
     );
   }
