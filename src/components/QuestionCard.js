@@ -132,9 +132,10 @@ class QuestionCard extends React.Component {
       );
     }
     if (theCard === "Polls") {
-      return authedUser === null || users[authedUser] === undefined ? (
-        <p> Loading </p>
-      ) : (
+      // return authedUser === null || users[authedUser] === undefined ? (
+      //   <p> Loading </p>
+      // ) :
+      return (
         <Card style={{ width: "100%" }}>
           <Card.Content>
             <Card.Header>
