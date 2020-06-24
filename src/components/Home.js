@@ -82,7 +82,9 @@ class Home extends React.Component {
 }
 
 function mapStateToProps({ users, questions, authedUser }) {
-  if (authedUser !== "") {
+  if (authedUser === "") {
+    return { authedUser };
+  } else {
     const answeredIds = Object.keys(users[authedUser].answers);
     const unAnswered = Object.values(questions)
       .filter(question => !answeredIds.includes(question.id))
@@ -98,7 +100,6 @@ function mapStateToProps({ users, questions, authedUser }) {
       authedUser
     };
   }
-  return authedUser;
 }
 
 export default connect(mapStateToProps)(Home);
