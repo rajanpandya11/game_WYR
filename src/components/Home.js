@@ -4,6 +4,7 @@ import { Tab, Container } from "semantic-ui-react";
 import QuestionCard from "./QuestionCard";
 import { handleAnswersQuestions } from "../actions/questions";
 import NewPoll from "./NewPoll";
+import Leaderboard from "./Leaderboard";
 
 class Home extends React.Component {
   render() {
@@ -58,7 +59,7 @@ class Home extends React.Component {
 
         {
           menuItem: "Leaderboard",
-          render: () => <Tab.Pane>Tab 3 Content</Tab.Pane>
+          render: () => <Leaderboard />
         }
       ];
     };
