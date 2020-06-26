@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { Tab, Container } from "semantic-ui-react";
 import QuestionCard from "./QuestionCard";
@@ -18,72 +18,68 @@ class Home extends React.Component {
 
     console.log(this.props);
 
-    if (authedUser === "") {
-      return <Redirect to="/login" />;
-    } else {
-      const panes = props => {
-        // const { questionsForUser, authedUser } = props;
+    const panes = props => {
+      const { questionsForUser, authedUser } = props;
 
-        return [
-          {
-            menuItem: "Answered",
-            render: () => (
-              <Tab.Pane>
-                {questionsForUser.answered.map(q => (
-                  <QuestionCard
-                    key={q.id}
-                    question_id={q.id}
-                    answered={true}
-                    userId={authedUser}
-                    voteHandle={voteHandle}
-                  />
-                ))}
-              </Tab.Pane>
-            )
-          },
-          {
-            menuItem: "Submit Vote",
-            render: () => (
-              <Tab.Pane>
-                {questionsForUser.unAnswered.map(q => (
-                  <QuestionCard
-                    key={q.id}
-                    question_id={q.id}
-                    answered={false}
-                    userId={authedUser}
-                    voteHandle={voteHandle}
-                  />
-                ))}
-              </Tab.Pane>
-            )
-          },
+      return [
+        {
+          menuItem: "Answered",
+          render: () => (
+            <Tab.Pane>
+              {questionsForUser.answered.map(q => (
+                <QuestionCard
+                  key={q.id}
+                  question_id={q.id}
+                  answered={true}
+                  userId={authedUser}
+                  voteHandle={voteHandle}
+                />
+              ))}
+            </Tab.Pane>
+          )
+        },
+        {
+          menuItem: "Submit Vote",
+          render: () => (
+            <Tab.Pane>
+              {questionsForUser.unAnswered.map(q => (
+                <QuestionCard
+                  key={q.id}
+                  question_id={q.id}
+                  answered={false}
+                  userId={authedUser}
+                  voteHandle={voteHandle}
+                />
+              ))}
+            </Tab.Pane>
+          )
+        },
 
-          {
-            menuItem: "Submit Question",
-            render: () => <NewPoll />
-          },
+        {
+          menuItem: "Submit Question",
+          render: () => <NewPoll />
+        },
 
-          {
-            menuItem: "Leaderboard",
-            render: () => <Leaderboard />
-          }
-        ];
-      };
-      return (
-        <Container>
-          <Tab
-            menu={{ color, fluid: true, vertical: true, tabular: true }}
-            panes={panes({ questionsForUser, authedUser })}
-          />
-        </Container>
-      );
-    }
+        {
+          menuItem: "Leaderboard",
+          render: () => <Leaderboard />
+        }
+      ];
+    };
+    return (
+      <Container>
+        <Tab
+          menu={{ color, fluid: true, vertical: true, tabular: true }}
+          panes={panes({ questionsForUser, authedUser })}
+        />
+      </Container>
+    );
   }
 }
 
 function mapStateToProps({ users, questions, authedUser }) {
-  if (authedUser === "") {
-    return { authedUser };
+  if (authedUser === "" || authedUser === null || authedUser === undefined) {
+    return;
   } else {
     const answeredIds = Object.keys(users[authedUser].answers);
     const unAnswered = Object.values(questions)
