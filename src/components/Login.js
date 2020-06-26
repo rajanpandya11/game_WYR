@@ -16,6 +16,24 @@ const profileOptions = [
     text: "Rajan Pandya",
     value: "Rajan Pandya",
     image: { avatar: false, src: "" }
+  },
+  {
+    key: "sarahedo",
+    text: "Sarah Edo",
+    value: "Sarah Edo",
+    image: { avatar: false, src: "" }
+  },
+  {
+    key: "tylermcginnis",
+    text: "Tyler McGinnis",
+    value: "Tyler McGinnis",
+    image: { avatar: false, src: "" }
+  },
+  {
+    key: "johndoe",
+    text: "John Doe",
+    value: "John Doe",
+    image: { avatar: false, src: "" }
   }
 ];
 

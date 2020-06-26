@@ -25,14 +25,14 @@ class App extends React.Component {
       <Router>
         <div className="App">
           {authedUser === null ? (
-            <Route component={Login} />
+            <Redirect to="/login" />
           ) : (
             <Fragment>
               <Header as="h1" size="huge" dividing textAlign="center">
                 <Link to="/"> Would you rather</Link>
               </Header>
               <Switch>
-                <Route path="/login" exact component={Login} />
+                <Route path="/login" component={Login} />
                 <PrivateRoute exact path="/" component={Home} />
               </Switch>
             </Fragment>

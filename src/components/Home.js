@@ -66,6 +66,11 @@ class Home extends React.Component {
         }
       ];
     };
+
+    if (authedUser === "" || authedUser === null || authedUser === undefined) {
+      return <h1>Please Login.</h1>;
+    }
+
     return (
       <Container>
         <Tab
@@ -79,7 +84,7 @@ class Home extends React.Component {
 
 function mapStateToProps({ users, questions, authedUser }) {
   if (authedUser === "" || authedUser === null || authedUser === undefined) {
-    return;
+    return { authedUser };
   } else {
     const answeredIds = Object.keys(users[authedUser].answers);
     const unAnswered = Object.values(questions)
