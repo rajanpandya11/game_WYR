@@ -8,10 +8,10 @@ import {
   Redirect,
   useHistory,
   useLocation,
+  Link,
   BrowserRouter as Router
 } from "react-router-dom";
 import { handleInitialData } from "../actions/shared";
-import { Link } from "react-router-dom";
 import { Header } from "semantic-ui-react";
 
 class App extends React.Component {
